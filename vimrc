@@ -7,8 +7,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mileszs/ack.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'mattn/emmet-vim'
+" Plug 'easymotion/vim-easymotion'
+Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'vim-scripts/DrawIt'
@@ -17,11 +17,11 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'w0rp/ale'
 
-" Plug 'Shougo/neocomplete.vim'
 " Plug 'lilydjwg/fcitx.vim' "solve vim chinese input method
 " Plug 'CodeFalling/fcitx-vim-osx'
-" Plug 'Valloric/YouCompleteMe'
-" Plug 'davidhalter/jedi-vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+" Plug 'Rykka/riv.vim'
 " Plug 'maralla/completor.vim'
 "Plug 'ternjs/tern_for_vim'
 "Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -31,10 +31,10 @@ Plug 'mxw/vim-jsx'
 "Plug 'ekalinin/Dockerfile.vim'
 
 " Markdown Plugin
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " Plug 'jszakmeister/markdown2ctags'
-Plug 'suan/vim-instant-markdown'
+Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 
 " code formatter
 Plug 'Chiel92/vim-autoformat'
@@ -107,6 +107,8 @@ nmap <leader><Space><Space> :%s/\s\+$//<cr>
 nnoremap <leader>nu :set nu!<CR>
 nnoremap <leader>hl :set hlsearch!<CR>
 nnoremap <leader>is :set incsearch!<CR>
+nnoremap <Leader>W :let @/=expand('<cword>')\|set hlsearch<C-M>
+
 
 "jump to the last position when reopening a file
 if has("autocmd")
@@ -262,7 +264,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 " autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
@@ -278,10 +280,12 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "YouCompleteMe
-nnoremap <leader>gd :YcmCompleter GetDoc<CR>
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gk :YcmCompleter GetDoc<CR>
+nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <leader>pc :pc<CR>
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 "let g:ycm_open_loclist_on_ycm_diags = 1
@@ -290,14 +294,20 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_python_binary_path = 'python3'
 
 " jedi-vim
-" let g:jedi#popup_select_first = 0
-" let g:jedi#show_call_signatures = "1"
+let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = "2"
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
 
 " completor.vim
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-let g:completor_python_binary = '/usr/local/bin/python3'
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+" let g:completor_python_binary = '/usr/local/bin/python3'
 
 " vim-multiple-cursors
 " Called once right before you start selecting multiple cursors
