@@ -312,10 +312,12 @@ set -x HOMEBREW_BOTTLE_DOMAIN http://7xkcej.dl1.z0.glb.clouddn.com
 
 ## pip
 
-vim  ~/pip/.pip.conf
+vim  ~/pip/.pip.conf (Windows 系统下是 c:\users\xx\pip.ini)
+
+```
 [global]
 index-url = https://pypi.douban.com/simple
-
+```
 
 ## debug python
 
