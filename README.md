@@ -21,7 +21,7 @@ Menlo 18pt
 
 ## vim8 setting
 
-### install vim8.0
+### Install
 
 #### On Ubuntu
 
@@ -31,11 +31,19 @@ sudo apt update
 sudo apt install vim
 ```
 
+#### On Centos/Fefora
+
+```
+curl -L https://copr.fedorainfracloud.org/coprs/mcepl/vim8/repo/epel-7/mcepl-vim8-epel-7.repo -o /etc/yum.repos.d/mcepl-vim8-epel-7.repo
+yum update vim* -y
+yum install cmake gcc-c++ -y
+```
+
 #### On Arch
 
 	sudo pacman -S vim
 
-### my vim configuration
+### configuration file
 
 ```
 ln -s ~/work-on-terminal/vimrc ~/.vimrc
@@ -46,7 +54,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 open vim, and execute `:PlugInstall` to install vim plugins.
 
-### Plugins Intro
+### Plugins Introduce
 
 + Plug 'kien/ctrlp.vim'
 
@@ -155,6 +163,16 @@ Create a `.tern-project` file like follows in the root directory of your JavaScr
 
 After install eslint globally, you should execute `eslint --init` to generate configuration file on your project.
 
+#### HTML
+
+1. syntax check
+	
+		npm install -g htmllint
+
+2. formatter
+
+		npm install js-beautify -g
+
 #### python
 
 1. code completion
@@ -163,11 +181,11 @@ There is no additional configuration for Python completion and GoTo commands. It
 
 2. syntax check
 
-	pip install flake8
+		pip install flake8
 
 3. code formatter
 	
-	pip install yapf
+		pip install yapf
 
 
 #### c/c++
@@ -240,7 +258,7 @@ It take effects when you log in next time.
 ### INSTALLATION
 
 ```
-ln -sf ~/work-on-linux/tmux.conf ~/.tmux.conf
+ln -sf ~/work-on-terminal/tmux.conf ~/.tmux.conf
 ```
 
 ### INSTALL TPM(Tmux Plugin Manager)

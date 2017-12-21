@@ -204,7 +204,10 @@ let g:UltiSnipsExpandTrigger = '<c-j>'
 nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " vim-autoformat
+nnoremap <Leader>af :Autoformat<CR>
+
 let g:formatter_yapf_style = 'pep8'
+let g:formatters_html = ['htmlbeautify']
 
 " neocomplete
 " Disable AutoComplPop.
@@ -280,7 +283,7 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "YouCompleteMe
-nnoremap <leader>gk :YcmCompleter GetDoc<CR>
+nnoremap <leader>gd :YcmCompleter GetDoc<CR>
 nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 " nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -338,9 +341,10 @@ let g:ale_echo_cursor = 1
 nmap <silent> <leader>ak <Plug>(ale_previous_wrap)
 nmap <silent> <leader>aj <Plug>(ale_next_wrap)
 let g:ale_linters = {
-			\ 'javascript': ['eslint'],
-			\ 'jsx': ['eslint'],
-			\}
+  \ 'javascript': ['eslint'],
+  \ 'jsx': ['eslint'],
+  \ 'html': ['htmlhint'],
+\}
 " ale Python
 let g:ale_python_flake8_executable = 'python3'
 let g:ale_python_flake8_options = '-m flake8'
@@ -358,20 +362,33 @@ let g:ackhighlight=1 "highlight the searched term
 "Integrate ag to Ack
 let g:ackprg='ag --nogroup --nocolor --column'
 
-" autoformat
-nnoremap <Leader>af :Autoformat<CR>
-
 " Run in tmux
 nnoremap <Leader>ot :OpenTmuxPane 0 <CR>
 
 nnoremap <Leader>rb :RitCommand 'bpython' 0<CR>
 nnoremap <Leader>rn :RitCommand 'node' 0<CR>
 
-nnoremap <Leader>rp :RitCurrentFile python3 1<CR>
-nnoremap <Leader>rt :RitCurrentFile py.test 1<CR>
+" nnoremap <Leader>rp :RitCurrentFile python3 1<CR>
+" nnoremap <Leader>rt :RitCurrentFile py.test 1<CR>
 
 nnoremap <Leader>rj :RitCurrentFile node 1<CR>
 nnoremap <Leader>rq :RitClose <CR>
+
+nnoremap <Leader>rc :call RunCodeInTmux()<CR>
+function! RunCodeInTmux()
+    if &filetype == 'python'
+        :RitCurrentFile python3 1<CR>
+    endif
+endfunction
+" debug python code
+nnoremap <Leader>db Oimport pdb<CR>pdb.set_trace()<Esc>
+
+" nnoremap <Leader>dc :call DebugInTmux()<CR>
+" function! DebugInTmux()
+"     if &filetype == 'python'
+"         :RitCurrentFile python3 1<CR>
+"     endif
+" endfunction
 
 "vim-jsx
 "let g:jsx_ext_required = 0
