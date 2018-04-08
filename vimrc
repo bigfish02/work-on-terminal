@@ -8,7 +8,7 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mileszs/ack.vim'
 " Plug 'easymotion/vim-easymotion'
-Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript'] }
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'vim-scripts/DrawIt'
@@ -17,8 +17,11 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'w0rp/ale'
 
+Plug 'will133/vim-dirdiff'
+
 " Plug 'lilydjwg/fcitx.vim' "solve vim chinese input method
 " Plug 'CodeFalling/fcitx-vim-osx'
+" Plug 'plytophogy/vim-virtualenv'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 " Plug 'Rykka/riv.vim'
@@ -158,6 +161,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeWinSize=25
 "display hidden files
 let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\.pyc$']
 
 
 "NERDcommenter
@@ -166,7 +170,7 @@ let g:NERDCOMPACTSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
-"let g:NERDCustomDelimiters = { 'javascript.jsx': { 'left': '{/* ', 'right': ' */}' } }
+" let g:NERDCustomDelimiters = { 'javascript.jsx': { 'left': '{/* ', 'right': ' */}' } }
 
 "TagBar
 map <leader>tt :TagbarToggle<CR>
@@ -193,6 +197,7 @@ nmap <leader>mp :InstantMarkdownPreview<CR>
 "ctrlp
 let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 "ultisnips
 
@@ -283,6 +288,7 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "YouCompleteMe
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
 nnoremap <leader>gd :YcmCompleter GetDoc<CR>
 nnoremap <leader>gc :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
@@ -294,16 +300,16 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 "let g:ycm_open_loclist_on_ycm_diags = 1
 " let g:ycm_global_ycm_extra_conf = '/root/.ycm_extra_conf.py'
 "let g:ycm_always_populate_location_list = 1
-let g:ycm_python_binary_path = 'python3'
+" let g:ycm_python_binary_path = '/usr/local/bin/python2'
 
 " jedi-vim
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = "2"
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
+" let g:jedi#popup_select_first = 0
+" let g:jedi#show_call_signatures = "2"
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_definitions_command = ""
+" let g:jedi#documentation_command = "K"
+" let g:jedi#usages_command = "<leader>n"
 " let g:jedi#completions_command = "<C-Space>"
 
 " completor.vim
@@ -345,13 +351,17 @@ let g:ale_linters = {
   \ 'jsx': ['eslint'],
   \ 'html': ['htmlhint'],
 \}
+let g:ale_javascript_eslint_executable = 'eslint'
+let g:ale_javascript_eslint_options = '-c ~/work-on-terminal/eslintrc.js'
+let g:ale_javascript_eslint_use_global = 0
 " ale Python
-let g:ale_python_flake8_executable = 'python3'
-let g:ale_python_flake8_options = '-m flake8'
-nnoremap <leader>ap :let g:ale_python_flake8_executable = 'python2'<CR>
+let g:ale_python_flake8_executable = '/usr/local/bin/flake8'
+let g:ale_python_flake8_use_global = 1
+
+" nnoremap <leader>ap :let g:ale_python_flake8_executable = 'python2'<CR>
 
 " auto-pair
-" let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 1
 
 "Ack
 "search code
@@ -390,8 +400,8 @@ nnoremap <Leader>db Oimport pdb<CR>pdb.set_trace()<Esc>
 "     endif
 " endfunction
 
-"vim-jsx
-"let g:jsx_ext_required = 0
+" vim-jsx
+let g:jsx_ext_required = 0
 
 "vimwiki
 " let g:vimwiki_list = [{'path': '~/my_site/',
@@ -418,7 +428,7 @@ autocmd FileType vim set shiftwidth=4
 autocmd FileType html,css,less,scss,svg set tabstop=2 shiftwidth=2
 "
 "javascript code indent
-autocmd FileType javascript,javascript.jsx set expandtab tabstop=2 shiftwidth=2
+autocmd FileType javascript,javascript.jsx set tabstop=4 shiftwidth=4
 
 "json code indent
 autocmd FileType json set shiftwidth=4
@@ -448,3 +458,11 @@ set statusline+=\ %{strlen(&fenc)?&fenc:'none'} "file encoding
 set statusline+=\ %y      "filetype
 set statusline+=\ %=\ %l/%L\ (%p%%)\             "Rownumber/total (%)
 set statusline+=\ col:%c\                            "Colnr
+
+" 默认是 python3 允许环境
+let g:ycm_python_binary_path = '/usr/local/bin/python2'
+function! RunCodeInTmux()
+    if &filetype == 'python'
+        :RitCurrentFile python2 1<CR>
+    endif
+endfunction

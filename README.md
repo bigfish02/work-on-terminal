@@ -43,6 +43,10 @@ yum install cmake gcc-c++ -y
 
 	sudo pacman -S vim
 
+#### On Mac
+
+	brew install vim --override-system-vim
+
 ### configuration file
 
 ```
@@ -159,9 +163,27 @@ Create a `.tern-project` file like follows in the root directory of your JavaScr
 
 2. syntax check
 
-	sudo npm install -g eslint
+```
+sudo npm install -g eslint
+```
 
 After install eslint globally, you should execute `eslint --init` to generate configuration file on your project.
+
+3. 使用全局的 eslint 配置文件
+
+You can also use the configuration file in home directory:
+
+```
+ln -sfv ~/work-on-terminal/.eslintrc.js ~/.eslintrc.js
+yarn global add eslint-plugin-react
+```
+
+4. 安装相应的插件
+
+```
+npm install -g eslint-plugin-react
+npm install -g babel-eslint
+```
 
 #### HTML
 
@@ -318,8 +340,36 @@ vim  ~/pip/.pip.conf (Windows 系统下是 c:\users\xx\pip.ini)
 [global]
 index-url = https://pypi.douban.com/simple
 ```
+## python
 
-## debug python
+```
+brew install python
+```
+
+add the following to ~/.config/fish/config.fish
+
+```
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+```
+
+### virtualenv
+
+pip install virtualfish
+
+add the following to ~/.config/fish/config.fish to change prompt when source virtualenv.
+
+```
+eval (python2 -m virtualfish)
+functions -c fish_prompt _old_fish_prompt
+function fish_prompt
+	if set -q VIRTUAL_ENV
+		echo -n -s (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
+	end
+    _old_fish_prompt
+end
+```
+
+### debug python
 
 	pip3 install ipdb
 
