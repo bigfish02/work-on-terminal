@@ -1,23 +1,23 @@
 # work on terminal
 
-I enjoy working on terminal. Those tools I used are vim, tmux, fish and ipython. They improve my productivity.
+I enjoy working on terminal. Those tools I often used are vim, tmux, fish and ipython/bpython. It improves my productivity.
 
 This repository includes all my configuration.
 
-## Base setting
 
-1. Set Terminal Fonts
+## Basic Usage
 
-On resolution 1920x1080
-Droid Sans Mono Dotted for Powerline Regular 14pt
+1. Get simple vimrc
 
-On iMac 5K:
-DejaVu Sans Mono for Powerline 18pt
-Menlo 18pt
+```
+wget https://raw.githubusercontent.com/bigfish02/work-on-terminal/master/vimrc_simple -O ~/.vimrc
+```
 
-2. Install my configuration for vim8, fish, tmux
+2. Get my configuration for vim8, fish, tmux
 
-		git clone https://github.com/bigfish02/work-on-terminal.git ~/work-on-terminal
+```
+git clone https://github.com/bigfish02/work-on-terminal.git ~/work-on-terminal
+```
 
 ## vim8 setting
 
