@@ -19,6 +19,8 @@ wget https://raw.githubusercontent.com/bigfish02/work-on-terminal/master/vimrc_s
 git clone https://github.com/bigfish02/work-on-terminal.git ~/work-on-terminal
 ```
 
+> Few years ago, I spend a lot of time to configure my terminal to make it looks beautiful. However I like simple and 
+
 ## vim8 setting
 
 ### Install
@@ -45,12 +47,12 @@ yum install cmake gcc-c++ -y
 
 #### On Mac
 
-	brew install vim --override-system-vim
+	brew install vim --override-system-vim --with-python3
 
 ### configuration file
 
 ```
-ln -s ~/work-on-terminal/vimrc ~/.vimrc
+ln -sfv ~/work-on-terminal/vimrc ~/.vimrc
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
